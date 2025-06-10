@@ -28,7 +28,9 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Actions</th>
+                    <th>Address</th>
+                    <th>Created At</th>
+                    <th>Actions</th> 
                 </tr>
             </thead>
 
@@ -58,19 +60,26 @@
                     }
 
                     // Read data of each row
-                    while($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['name'] . "</td>";
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['phone'] . "</td>";
-                        echo "<td>" . $row['address'] . "</td>";
-                        echo "<td>" . $row['created_at'] . "</td>";
-                        echo "<td>
-                                <a href='/Php-CRUD-Application-List of Clients/edit.php?id=" . $row['id'] . "' class='btn btn-warning'>Edit</a>
-                                <a href='/Php-CRUD-Application-List of Clients/delete.php?id=" . $row['id'] . "' class='btn btn-danger'>Delete</a>
-                              </td>";
-                        echo "</tr>";
+                    while($row = $result->fetch_assoc()) {
+                       echo "
+                       
+                       <tr>
+
+                        <td>$row[id]</td>
+                        <td>$row[name]</td>
+                        <td>$row[email]</td>
+                        <td>$row[phone]</td>
+                        <td>$row[address]</td>
+                        <td>$row[created_at]</td>
+                        
+                        <td>
+                         <a href='/Php-CRUD-Application-List of Clients/edit.php?id=" . $row['id'] . "' class='btn btn-warning'>Edit</a>
+                        <a href='/Php-CRUD-Application-List of Clients/delete.php?id=" . $row['id'] . "' class='btn btn-danger'>Delete</a>
+                         </td>
+
+                        </tr>
+                        ";
+ 
                     }
 
                 ?>
