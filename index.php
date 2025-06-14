@@ -16,7 +16,7 @@
     <div class = "container my-5">
         <h2 class="mb-4">List of Clients</h2>
         <table class="table table-striped">
-        <a class="btn btn-primary" href="/index.php" role="button">Add New Client</a>
+        <a class="btn btn-primary" href="/create.php" role="button">Add New Client</a>
         <br>
 
         <table class="table">
