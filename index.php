@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>List of Clients</title>
+    <title>Clients</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
 </head>
@@ -14,9 +14,10 @@
 <body>
 
     <div class = "container my-5">
-        <h2 class="mb-4">List of Clients</h2>
+        <h2>List of Clients</h2>
+
         <table class="table table-striped">
-        <a class="btn btn-primary" href="/create.php" role="button">Add New Client</a>
+        <a class="btn btn-primary" href="/Php-CRUD-Application-List of Clients/create.php" role="button">Add New Client</a>
         <br>
 
         <table class="table">
@@ -96,8 +97,8 @@
 
                 <!-- Buttons -->
                 <td>
-                    <a href="/Php-CRUD-Application-List of Clients/edit.php?id=10" class="btn btn-warning">Edit</a>
-                    <a href="/Php-CRUD-Application-List of Clients/delete.php?id=10" class="btn btn-danger">Delete</a>
+                    <a class= "btn btn-primary btn-sm" href= "/Php-CRUD-Application-List of Clients/edit.php"> Edit</a>
+                    <a class= "btn btn-primary btn-sm" href= "/Php-CRUD-Application-List of Clients/delete.php"> Delete</a>
                 </td>
 
 
