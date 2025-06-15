@@ -1,4 +1,5 @@
 <?php
+$id="";
 $name= "";
 $email = "";
 $phone = "";
@@ -13,47 +14,29 @@ if ($connection->connect_error) {
 
 $errorMessage = "";
 $successMessage = "";
-$result = "";
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST["name"];
-        $email = $_POST["email"];
-        $phone = $_POST["phone"];
-        $address = $_POST["address"];
+if($_SERVER['REQUEST_METHOD']== GET){
 
-        do {
-        if (empty($name) || empty($email) || empty($phone) || empty($address)) {
-            $errorMessage = "All fields are required";
-            break;
-        }
-
-        // Check for existing email
-        $checkEmail = "SELECT id FROM clients WHERE email = '$email' LIMIT 1";
-        $checkResult = $connection->query($checkEmail);
-        
-        if ($checkResult && $checkResult->num_rows > 0) {
-            $errorMessage = "Email address already in use. Please enter a different one.";
-            break;
-        }
-
-        // Proceed with insertion
-        $sql = "INSERT INTO clients (name, email, phone, address)
-                VALUES ('$name', '$email', '$phone', '$address')";
-        $result = $connection->query($sql);
-
-        if (!$result) {
-            $errorMessage = "Something went wrong while saving the data.";
-            break;
-        }
-
-        // Clear form values and show success
-        $name = $email = $phone = $address = "";
-        $successMessage = "Client added successfully";
-
+    if(!isset($_GET["id"]) || empty($_GET["id"])){
         header("location: index.php");
         exit;
-    } while (false);
+    }
 
+    $id = $_GET["id"];
+
+    $sql = "SELECT * FROM clients WHERE id = $id";
+    $result = $connection->query($sql);
+    $row = $result->fetch_assoc();
+
+    if(!$row){
+        header("location: index.php");
+        exit;
+    }
+}
+
+else{
+
+}
 }
 
 
@@ -99,7 +82,8 @@ $result = "";
 
             
             <form method = "post">
-        
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        
                 <!-- Name -->
                 <div class="d-flex justify-content-center">
                       <div class="row mb-3 align-items-center" style="width: 1000px;">
