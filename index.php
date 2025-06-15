@@ -1,3 +1,13 @@
+<?php
+    
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +27,7 @@
         <h2>List of Clients</h2>
 
         <table class="table table-striped">
-        <a class="btn btn-primary" href="/Php-CRUD-Application-List of Clients/create.php" role="button">Add New Client</a>
+        <a class="btn btn-primary" href="create.php" button">Add New Client</a>
         <br>
 
         <table class="table">
@@ -45,19 +55,20 @@
 
 
                     //Create Connection
-                    $connection = mysqli_connect($servername, $username, $password, $database);
+                    $connection = new mysqli($servername, $username, $password, $database);
 
                     // Check Connection  
-                    if (!$connection) {
-                    die("Connection failed: " . mysqli_connect_error());
-                }
+                    if ($connection->connect_error) {
+                        die("Connection failed: " . $connection->connect_error);
+                    }
+
 
                     $sql = "SELECT * FROM clients";
-                    $result = mysqli_query($connection, $sql);
+                    $result = $connection->query($sql);
 
                     // Check if there are results
                     if(!$result) {
-                        die("Query failed: " . mysqli_error($connection));
+                        die("Query failed: " . $connection->error);
                     }
 
                     // Read data of each row
@@ -74,8 +85,8 @@
                         <td>$row[created_at]</td>
                         
                         <td>
-                         <a href='/Php-CRUD-Application-List of Clients/edit.php?id=" . $row['id'] . "' class='btn btn-warning'>Edit</a>
-                        <a href='/Php-CRUD-Application-List of Clients/delete.php?id=" . $row['id'] . "' class='btn btn-danger'>Delete</a>
+                            <a href='/Php-CRUD-Application-List of Clients/edit.php?id=" . $row['id'] . "' class='btn btn-warning'>Edit</a>
+                            <a href='/Php-CRUD-Application-List of Clients/delete.php?id=" . $row['id'] . "' class='btn btn-danger'>Delete</a>
                          </td>
 
                         </tr>
@@ -84,25 +95,6 @@
                     }
 
                 ?>
-
-          
-
-                <!-- PHP code to fetch and display clients will go here -->
-                <td>10</td>
-                <td>Alice Johnson</td>
-                <td>alice.johnson@example.com</td>
-                <td>555-1234</td>
-                <td>123 Maple Street</td>
-                <td>07/06/2025</td>
-
-                <!-- Buttons -->
-                <td>
-                    <a class= "btn btn-primary btn-sm" href= "/Php-CRUD-Application-List of Clients/edit.php"> Edit</a>
-                    <a class= "btn btn-primary btn-sm" href= "/Php-CRUD-Application-List of Clients/delete.php"> Delete</a>
-                </td>
-
-
-
 
 
             </tbody>
