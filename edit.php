@@ -15,8 +15,9 @@ if ($connection->connect_error) {
 $errorMessage = "";
 $successMessage = "";
 
-if($_SERVER['REQUEST_METHOD']== GET){
+if($_SERVER['REQUEST_METHOD']== 'GET'){
 
+    // Get method: Show existing client data
     if(!isset($_GET["id"]) || empty($_GET["id"])){
         header("location: index.php");
         exit;
@@ -24,6 +25,7 @@ if($_SERVER['REQUEST_METHOD']== GET){
 
     $id = $_GET["id"];
 
+    // Read the row of the selected client
     $sql = "SELECT * FROM clients WHERE id = $id";
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
@@ -32,14 +34,43 @@ if($_SERVER['REQUEST_METHOD']== GET){
         header("location: index.php");
         exit;
     }
+    $name= $row["name"];
+    $email = $row["email"];
+    $phone = $row["phone"];
+    $address = $row["address"];
 }
 
 else{
+    // POST method: Update client data
+    $id = $_POST["id"];
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $address = $_POST["address"];
 
+    do {
+        if (empty($id) || empty($name) || empty($email) || empty($phone) || empty($address)) {
+            $errorMessage = "All the fields are required";
+            break;
+        }
+
+        $sql = "UPDATE clients SET name = '$name', email = '$email', phone = '$phone', address = '$address' WHERE id = $id";
+        $result = $connection->query($sql);
+
+        if (!$result) {
+            $errorMessage = "Something went wrong while updating the record.";
+            break;
+        }
+
+        $successMessage = "Client updated successfully!";
+        header("Location: index.php");
+        exit;
+
+        header("Location: index.php");
+        exit;
+
+    } while (false);
 }
-}
-
-
 
 
 ?>
